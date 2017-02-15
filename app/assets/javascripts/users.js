@@ -2,13 +2,13 @@
 //Document ready.
 $(document).on('turbolinks:load', function(){
   var theForm = $('#pro-form');
-  var submitBtn = $('#form-submit-btn');
+  var submitBtn = $('#form-signup-btn');
   
   //Set Stripe public key.
   Stripe.setPublishableKey( $('meta[name="stripe-key"]').attr('content') );
   
   //When user clicks form submit btn,
-  submitBtn.click(function(){
+  submitBtn.click(function(event){
     //prevent default submission behavior. 
     event.preventDefault();
     submitBtn.val("Processing").prop('disabled', true);
@@ -47,7 +47,7 @@ $(document).on('turbolinks:load', function(){
       //Send the card info to Stripe.
       Stripe.createToken({
         number: ccNum, 
-        CVC: cvcNum, 
+        cvc: cvcNum, 
         exp_month: expMonth,
         exp_year: expYear
       }, stripeResponseHandler);
